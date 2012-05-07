@@ -2,17 +2,6 @@ set nocompatible
 
 filetype off
 
-" set runtimepath+=~/.vim/bundle/vundle/
-" call vundle#rc()
-" 
-" Bundle 'gmarik/vundle'
-" Bundle 'altercation/vim-colors-solarized'
-" Bundle 'Rip-Rip/clang_complete'
-" Bundle 'matchit.zip'
-" Bundle 'scrooloose/nerdtree'
-" Bundle 'derekwyatt/vim-fswitch'
-" Bundle 'derekwyatt/vim-protodef'
-
 call pathogen#infect()
 call pathogen#helptags()
 
@@ -24,6 +13,10 @@ colorscheme solarized
 set viminfo='100,<50,s10,h,%
 
 set backspace=indent,eol,start
+
+set backupdir=~/.vim/backup
+set directory=~/.vim/swap
+set undodir=~/.vim/undo
 
 set showcmd
 
@@ -39,8 +32,8 @@ set encoding=utf-8
 set spelllang=en_us
 
 set textwidth=0
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 set expandtab
 
 augroup chromium
@@ -50,6 +43,18 @@ augroup END
 
 function! SetChromiumOptions()
     setlocal textwidth=80
+    setlocal shiftwidth=2
+    setlocal tabstop=2
+endfunction
+
+augroup firebird
+    au!
+    au BufEnter ~/projects/bv/firebird/* call SetFirebirdOptions()
+    au BufEnter ~/projects/memoryhub/* call SetFirebirdOptions()
+augroup END
+
+function! SetFirebirdOptions()
+    setlocal textwidth=0
     setlocal shiftwidth=2
     setlocal tabstop=2
 endfunction
@@ -88,6 +93,9 @@ set statusline+=%=                           " right align
 " set statusline+=%2*0x%-8B\                   " current char
 set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
 
+let g:DeleteTrailingWhitespace = 1
+let g:DeleteTrailingWhitespace_Action = 'delete'
+
 let mapleader=","
 
 map <silent> <leader>n :NERDTreeToggle<cr>
@@ -96,7 +104,7 @@ map <silent> <leader>a :FSHere<cr>
 
 imap <c-space> <c-x><c-o>
 
-let g:xptemplate_vars='author=J. Ryan Stinnett&email=jryans@gmail.com'
+" let g:xptemplate_vars='author=J. Ryan Stinnett&email=jryans@gmail.com'
 
 syntax on
 

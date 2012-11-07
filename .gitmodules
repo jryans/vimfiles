@@ -49,3 +49,15 @@
 [submodule "bundle/vim-stylus"]
 	path = bundle/vim-stylus
 	url = git://github.com/wavded/vim-stylus.git
+[submodule "bundle/vim-fugitive"]
+	path = bundle/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "bundle/vim-git"]
+	path = bundle/vim-git
+	url = https://github.com/tpope/vim-git.git
+[submodule "bundle/syntastic"]
+	path = bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
+[submodule "bundle/base16-vim"]
+	path = bundle/base16-vim
+	url = https://github.com/chriskempson/base16-vim.git

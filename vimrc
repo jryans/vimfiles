@@ -6,9 +6,8 @@ call pathogen#infect()
 call pathogen#helptags()
 
 set background=dark
-let g:solarized_termtrans=1
 
-colorscheme solarized
+colorscheme base16-default
 
 set viminfo='100,<50,s10,h,%
 
@@ -31,7 +30,7 @@ set smartcase
 set encoding=utf-8
 set spelllang=en_us
 
-set textwidth=0
+set textwidth=80
 set shiftwidth=2
 set tabstop=2
 set expandtab
@@ -66,6 +65,26 @@ augroup cpp
     au BufEnter *.h let b:fswitchdst = 'cc'
     au BufEnter *.h let b:fswitchlocs = './'
 augroup END
+
+" returns true iff is NERDTree open/active
+function! rc:isNTOpen()        
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+" returns true iff focused window is NERDTree window
+function! rc:isNTFocused()     
+  return -1 != match(expand('%'), 'NERD_Tree') 
+endfunction 
+
+" calls NERDTreeFind iff NERDTree is active, current window contains a modifiable file, and we're not in vimdiff
+function! rc:syncTree()
+  if &modifiable && rc:isNTOpen() && !rc:isNTFocused() && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+    wincmd p
+  endif
+endfunction
+
+autocmd BufEnter * call rc:syncTree()
 
 set cpoptions+=$
 
@@ -103,6 +122,12 @@ map <silent> <leader>h :nohls<cr>
 map <silent> <leader>a :FSHere<cr>
 
 imap <c-space> <c-x><c-o>
+
+let g:NERDTreeChDirMode=2
+
+if argc() > 0 && isdirectory(argv(0))
+  autocmd VimEnter * silent NERDTree argv(0)
+endif
 
 " let g:xptemplate_vars='author=J. Ryan Stinnett&email=jryans@gmail.com'
 

@@ -38,9 +38,28 @@ set expandtab
 augroup chromium
     au!
     au BufEnter ~/projects/chromium/* call SetChromiumOptions()
+    au BufEnter ~/projects/chromium/*.cc let b:fswitchdst = 'h'
+    au BufEnter ~/projects/chromium/*.cc let b:fswitchlocs = './'
+    au BufEnter ~/projects/chromium/*.h let b:fswitchdst = 'cc'
+    au BufEnter ~/projects/chromium/*.h let b:fswitchlocs = './'
 augroup END
 
 function! SetChromiumOptions()
+    setlocal textwidth=80
+    setlocal shiftwidth=2
+    setlocal tabstop=2
+endfunction
+
+augroup llvm
+    au!
+    au BufEnter ~/projects/llvm/* call SetLLVMOptions()
+    au BufEnter ~/projects/llvm/*.cpp let b:fswitchdst = 'h'
+    au BufEnter ~/projects/llvm/*.cpp let b:fswitchlocs = 'reg:|lib|include/clang|,reg:/lib/include/,./'
+    au BufEnter ~/projects/llvm/*.h let b:fswitchdst = 'cpp'
+    au BufEnter ~/projects/llvm/*.h let b:fswitchlocs = 'reg:|include/clang|lib|,reg:/include/lib/,./'
+augroup END
+
+function! SetLLVMOptions()
     setlocal textwidth=80
     setlocal shiftwidth=2
     setlocal tabstop=2
@@ -58,23 +77,15 @@ function! SetFirebirdOptions()
     setlocal tabstop=2
 endfunction
 
-augroup cpp
-    au!
-    au BufEnter *.cc let b:fswitchdst = 'h'
-    au BufEnter *.cc let b:fswitchlocs = './'
-    au BufEnter *.h let b:fswitchdst = 'cc'
-    au BufEnter *.h let b:fswitchlocs = './'
-augroup END
-
 " returns true iff is NERDTree open/active
-function! rc:isNTOpen()        
+function! rc:isNTOpen()
   return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
 endfunction
 
 " returns true iff focused window is NERDTree window
-function! rc:isNTFocused()     
-  return -1 != match(expand('%'), 'NERD_Tree') 
-endfunction 
+function! rc:isNTFocused()
+  return -1 != match(expand('%'), 'NERD_Tree')
+endfunction
 
 " calls NERDTreeFind iff NERDTree is active, current window contains a modifiable file, and we're not in vimdiff
 function! rc:syncTree()
@@ -84,7 +95,7 @@ function! rc:syncTree()
   endif
 endfunction
 
-autocmd BufEnter * call rc:syncTree()
+"autocmd BufEnter * call rc:syncTree()
 
 set cpoptions+=$
 

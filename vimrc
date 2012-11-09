@@ -31,9 +31,11 @@ set encoding=utf-8
 set spelllang=en_us
 
 set textwidth=80
-set shiftwidth=2
-set tabstop=2
-set expandtab
+
+augroup default
+  au!
+  au BufReadPost * :DetectIndent
+augroup END
 
 augroup chromium
     au!
@@ -46,8 +48,6 @@ augroup END
 
 function! SetChromiumOptions()
     setlocal textwidth=80
-    setlocal shiftwidth=2
-    setlocal tabstop=2
 endfunction
 
 augroup llvm
@@ -61,8 +61,6 @@ augroup END
 
 function! SetLLVMOptions()
     setlocal textwidth=80
-    setlocal shiftwidth=2
-    setlocal tabstop=2
 endfunction
 
 augroup firebird
@@ -73,8 +71,6 @@ augroup END
 
 function! SetFirebirdOptions()
     setlocal textwidth=0
-    setlocal shiftwidth=2
-    setlocal tabstop=2
 endfunction
 
 " returns true iff is NERDTree open/active
@@ -125,6 +121,9 @@ set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
 
 let g:DeleteTrailingWhitespace = 1
 let g:DeleteTrailingWhitespace_Action = 'delete'
+
+let g:detectindent_preferred_indent = 2
+let g:detectindent_preferred_expandtab = 1
 
 let mapleader=","
 

@@ -139,6 +139,8 @@ if argc() > 0 && isdirectory(argv(0))
   autocmd VimEnter * silent NERDTree argv(0)
 endif
 
+let g:markdown_fenced_languages = ["javascript"]
+
 " let g:xptemplate_vars='author=J. Ryan Stinnett&email=jryans@gmail.com'
 
 syntax on

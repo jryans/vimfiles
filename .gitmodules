@@ -70,3 +70,9 @@
 [submodule "bundle/detectindent"]
 	path = bundle/detectindent
 	url = git://github.com/ciaranm/detectindent.git
+[submodule "bundle/vim-markdown"]
+	path = bundle/vim-markdown
+	url = git://github.com/tpope/vim-markdown.git
+[submodule "bundle/vim-haskell"]
+	path = bundle/vim-haskell
+	url = git://github.com/wlangstroth/vim-haskell.git

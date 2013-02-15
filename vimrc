@@ -14,8 +14,10 @@ set viminfo='100,<50,s10,h,%
 set backspace=indent,eol,start
 
 set backupdir=~/.vim/backup
-set directory=~/.vim/swap
+set noswapfile
 set undodir=~/.vim/undo
+
+set wildignore+=build,node_modules
 
 set showcmd
 
@@ -128,12 +130,15 @@ let g:detectindent_preferred_expandtab = 1
 let mapleader=","
 
 map <silent> <leader>n :NERDTreeToggle<cr>
+map <silent> <leader>f :NERDTreeFind<cr>
 map <silent> <leader>h :nohls<cr>
 map <silent> <leader>a :FSHere<cr>
 
-imap <c-space> <c-x><c-o>
-
 let g:NERDTreeChDirMode=2
+let g:NERDTreeMouseMode=3
+let g:NERDTreeMinimalUI=1
+
+let g:CommandTMaxFiles=100000
 
 if argc() > 0 && isdirectory(argv(0))
   autocmd VimEnter * silent NERDTree argv(0)

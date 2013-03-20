@@ -17,7 +17,7 @@ set backupdir=~/.vim/backup
 set noswapfile
 set undodir=~/.vim/undo
 
-set wildignore+=build,node_modules
+set wildignore+=build,node_modules,out,.git,.svn,obj-*
 
 set showcmd
 
@@ -33,6 +33,8 @@ set encoding=utf-8
 set spelllang=en_us
 
 set textwidth=80
+
+set autoread
 
 augroup default
   au!
@@ -135,7 +137,7 @@ map <silent> <leader>h :nohls<cr>
 map <silent> <leader>a :FSHere<cr>
 
 let g:NERDTreeChDirMode=2
-let g:NERDTreeMouseMode=3
+"let g:NERDTreeMouseMode=3
 let g:NERDTreeMinimalUI=1
 
 let g:CommandTMaxFiles=100000

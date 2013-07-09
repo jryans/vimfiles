@@ -7,6 +7,8 @@ call pathogen#helptags()
 
 set background=dark
 
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+
 colorscheme base16-default
 
 set viminfo='100,<50,s10,h,%
@@ -123,7 +125,7 @@ set statusline+=%=                           " right align
 " set statusline+=%2*0x%-8B\                   " current char
 set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
 
-let g:DeleteTrailingWhitespace = 1
+let g:DeleteTrailingWhitespace = 0
 let g:DeleteTrailingWhitespace_Action = 'delete'
 
 let g:detectindent_preferred_indent = 2
@@ -148,7 +150,12 @@ endif
 
 let g:markdown_fenced_languages = ["javascript"]
 
-" let g:xptemplate_vars='author=J. Ryan Stinnett&email=jryans@gmail.com'
+" Highlight trailing whitespace
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
 
 syntax on
 

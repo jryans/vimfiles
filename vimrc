@@ -19,7 +19,7 @@ set backupdir=~/.vim/backup
 set noswapfile
 set undodir=~/.vim/undo
 
-set wildignore+=build,node_modules,out,.git,.svn,obj-*
+set wildignore+=node_modules,out,.git,.svn,obj-*
 
 set showcmd
 
@@ -98,6 +98,8 @@ function! rc:syncTree()
 endfunction
 
 "autocmd BufEnter * call rc:syncTree()
+
+set cc=+1
 
 set cpoptions+=$
 

@@ -79,26 +79,6 @@ function! SetFirebirdOptions()
     setlocal textwidth=0
 endfunction
 
-" returns true iff is NERDTree open/active
-function! rc:isNTOpen()
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
-
-" returns true iff focused window is NERDTree window
-function! rc:isNTFocused()
-  return -1 != match(expand('%'), 'NERD_Tree')
-endfunction
-
-" calls NERDTreeFind iff NERDTree is active, current window contains a modifiable file, and we're not in vimdiff
-function! rc:syncTree()
-  if &modifiable && rc:isNTOpen() && !rc:isNTFocused() && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-    wincmd p
-  endif
-endfunction
-
-"autocmd BufEnter * call rc:syncTree()
-
 set cc=+1
 
 set cpoptions+=$
@@ -141,14 +121,10 @@ map <silent> <leader>h :nohls<cr>
 map <silent> <leader>a :FSHere<cr>
 
 let g:NERDTreeChDirMode=2
-"let g:NERDTreeMouseMode=3
 let g:NERDTreeMinimalUI=1
+let g:NERDTreeAutoDeleteBuffer=1
 
 let g:CommandTMaxFiles=100000
-
-if argc() > 0 && isdirectory(argv(0))
-  autocmd VimEnter * silent NERDTree argv(0)
-endif
 
 let g:markdown_fenced_languages = ["javascript"]
 

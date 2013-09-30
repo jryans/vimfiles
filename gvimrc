@@ -5,4 +5,4 @@ set guioptions-=T
 set guioptions-=r
 set guioptions-=L
 
-set guifont=Menlo:h11
+set guifont=Source\ Code\ Pro:h12

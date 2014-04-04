@@ -40,46 +40,52 @@ set autoread
 
 augroup default
   au!
-  au BufReadPost * :DetectIndent
+  "au BufReadPost * :GuessIndent
+  au BufEnter * call SetDefaultOptions()
 augroup END
 
+function! SetDefaultOptions()
+  setlocal expandtab
+  setlocal shiftwidth=2
+  setlocal softtabstop=2
+endfunction
+
 augroup chromium
-    au!
-    au BufEnter ~/projects/chromium/* call SetChromiumOptions()
-    au BufEnter ~/projects/chromium/*.cc let b:fswitchdst = 'h'
-    au BufEnter ~/projects/chromium/*.cc let b:fswitchlocs = './'
-    au BufEnter ~/projects/chromium/*.h let b:fswitchdst = 'cc'
-    au BufEnter ~/projects/chromium/*.h let b:fswitchlocs = './'
+  au!
+  au BufEnter ~/projects/chromium/* call SetChromiumOptions()
+  au BufEnter ~/projects/chromium/*.cc let b:fswitchdst = 'h'
+  au BufEnter ~/projects/chromium/*.cc let b:fswitchlocs = './'
+  au BufEnter ~/projects/chromium/*.h let b:fswitchdst = 'cc'
+  au BufEnter ~/projects/chromium/*.h let b:fswitchlocs = './'
 augroup END
 
 function! SetChromiumOptions()
-    setlocal textwidth=80
 endfunction
 
 augroup llvm
-    au!
-    au BufEnter ~/projects/llvm/* call SetLLVMOptions()
-    au BufEnter ~/projects/llvm/*.cpp let b:fswitchdst = 'h'
-    au BufEnter ~/projects/llvm/*.cpp let b:fswitchlocs = 'reg:|lib|include/clang|,reg:/lib/include/,./'
-    au BufEnter ~/projects/llvm/*.h let b:fswitchdst = 'cpp'
-    au BufEnter ~/projects/llvm/*.h let b:fswitchlocs = 'reg:|include/clang|lib|,reg:/include/lib/,./'
+  au!
+  au BufEnter ~/projects/llvm/* call SetLLVMOptions()
+  au BufEnter ~/projects/llvm/*.cpp let b:fswitchdst = 'h'
+  au BufEnter ~/projects/llvm/*.cpp let b:fswitchlocs = 'reg:|lib|include/clang|,reg:/lib/include/,./'
+  au BufEnter ~/projects/llvm/*.h let b:fswitchdst = 'cpp'
+  au BufEnter ~/projects/llvm/*.h let b:fswitchlocs = 'reg:|include/clang|lib|,reg:/include/lib/,./'
 augroup END
 
 function! SetLLVMOptions()
-    setlocal textwidth=80
 endfunction
 
 augroup firebird
-    au!
-    au BufEnter ~/projects/bv/firebird/* call SetFirebirdOptions()
-    au BufEnter ~/projects/memoryhub/* call SetFirebirdOptions()
+  au!
+  au BufEnter ~/projects/bv/firebird/* call SetFirebirdOptions()
+  au BufEnter ~/projects/memoryhub/* call SetFirebirdOptions()
 augroup END
 
 function! SetFirebirdOptions()
-    setlocal textwidth=0
+  setlocal textwidth=0
 endfunction
 
 set cc=+1
+" look at matchadd from conway
 
 set cpoptions+=$
 
@@ -134,6 +140,10 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
+
+nnoremap ; :
+
+let javascript_enable_domhtmlcss = 1
 
 syntax on
 

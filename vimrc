@@ -131,6 +131,8 @@ let g:NERDTreeMinimalUI=1
 let g:NERDTreeAutoDeleteBuffer=1
 
 let g:CommandTMaxFiles=100000
+let g:CommandTInputDebounce = 200
+let g:CommandTFileScanner='watchman'
 
 let g:markdown_fenced_languages = ["javascript"]
 

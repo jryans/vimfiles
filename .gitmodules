@@ -79,3 +79,6 @@
 [submodule "bundle/guessindent"]
 	path = bundle/guessindent
 	url = git@github.com:ogier/guessindent.git
+[submodule "bundle/rust.vim"]
+	path = bundle/rust.vim
+	url = git@github.com:wting/rust.vim.git

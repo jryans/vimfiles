@@ -94,6 +94,11 @@ set smartindent
 
 set scrolloff=3
 
+" Make VIM faster
+set synmaxcol=200
+set ttyfast
+set ttyscroll=3
+
 set noerrorbells
 set visualbell t_vb=
 
@@ -104,7 +109,7 @@ set wildmenu
 set laststatus=2
 set statusline=
 set statusline+=%-3.3n\                      " buffer number
-set statusline+=%f\                          " file name
+set statusline+=%.30f\                       " file name
 set statusline+=%h%m%r%w                     " flags
 set statusline+=\[%{strlen(&ft)?&ft:'none'}, " filetype
 set statusline+=%{&encoding},                " encoding
@@ -130,9 +135,12 @@ let g:NERDTreeChDirMode=2
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeAutoDeleteBuffer=1
 
-let g:CommandTMaxFiles=100000
+let g:CommandTMaxFiles=200000
 let g:CommandTInputDebounce = 200
-let g:CommandTFileScanner='watchman'
+let g:CommandTFileScanner='git'
+
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_autoclose_preview_window_after_insertion = 1
 
 let g:markdown_fenced_languages = ["javascript"]
 
